@@ -23,3 +23,30 @@ function leFormulario(event) {
     transacaoNoEstoque(origem, destino, fruta, quantidade);
     atualizaTela();
 }
+
+function preencheLista(lista, estoqueDaPessoa) {
+    lista.textContent = "";
+
+    for (let i = 0; i < estoqueDaPessoa.length; i++) {
+        const monte = estoqueDaPessoa[i];
+        const li = document.createElement('li');
+        li.textContent = `${monte.tipo}: ${monte.quantidade}`;
+        lista.appendChild(li);
+    }
+}
+
+function atualizaTela() {
+    const estoque = getEstoque();
+    olJoao.innerHTML = "";
+    olMaria.innerHTML = "";
+    document.entrada.quantidade.value = 1;
+    document.entrada.fruta.value = "maca";
+
+    if (estoque.joao && estoque.joao.length > 0) {
+        preencheLista(olJoao, estoque.joao);
+    }
+
+    if (estoque.maria && estoque.maria.length > 0) {
+        preencheLista(olMaria, estoque.maria);
+    }
+}
